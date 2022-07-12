@@ -1,0 +1,8 @@
+SQLAlchemy
+
+discord
+
+Cython
+numpy
+transformers
+rudalle

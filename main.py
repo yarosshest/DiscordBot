@@ -23,9 +23,9 @@ async def on_ready():
     print("Бот запущен")
 
 
-@tasks.loop(hours=2)
+@tasks.loop(minutes=30)
 async def DalyCard():
-    if 10 <= datetime.now().hour <= 22:
+    if 1 >= datetime.now().hour:
         srv = ServerHandler()
         for i in srv.get_servers():
             if i.last_day != str(datetime.now().day):

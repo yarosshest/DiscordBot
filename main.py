@@ -25,29 +25,28 @@ async def on_ready():
 
 @tasks.loop(minutes=30)
 async def DalyCard():
-    if 1 >= datetime.now().hour:
-        srv = ServerHandler()
-        for i in srv.get_servers():
-            if i.last_day != str(datetime.now().day):
-                channels = bot.get_guild(i.discord_id).text_channels
-                for channel in channels:
-                    if channel.id == i.daly_channel:
-                        match datetime.weekday(datetime.now()):
-                            case 0:
-                                await channel.send(file=discord.File('resources/monday.jpg'))
-                            case 1:
-                                await channel.send(file=discord.File('resources/tuesday.jpg'))
-                            case 2:
-                                await channel.send(file=discord.File('resources/wednesday.jpg'))
-                            case 3:
-                                await channel.send(file=discord.File('resources/thursday.jpg'))
-                            case 4:
-                                await channel.send(file=discord.File('resources/friday.jpg'))
-                            case 5:
-                                await channel.send(file=discord.File('resources/saturday.jpg'))
-                            case 6:
-                                await channel.send(file=discord.File('resources/sunday.jpg'))
-                        srv.set_day(i.discord_id, str(datetime.now().day))
+    srv = ServerHandler()
+    for i in srv.get_servers():
+        if i.last_day != str(datetime.now().day):
+            channels = bot.get_guild(i.discord_id).text_channels
+            for channel in channels:
+                if channel.id == i.daly_channel:
+                    match datetime.weekday(datetime.now()):
+                        case 0:
+                            await channel.send(file=discord.File('resources/monday.jpg'))
+                        case 1:
+                            await channel.send(file=discord.File('resources/tuesday.jpg'))
+                        case 2:
+                            await channel.send(file=discord.File('resources/wednesday.jpg'))
+                        case 3:
+                            await channel.send(file=discord.File('resources/thursday.jpg'))
+                        case 4:
+                            await channel.send(file=discord.File('resources/friday.jpg'))
+                        case 5:
+                            await channel.send(file=discord.File('resources/saturday.jpg'))
+                        case 6:
+                            await channel.send(file=discord.File('resources/sunday.jpg'))
+                    srv.set_day(i.discord_id, str(datetime.now().day))
 
 
 @bot.command()
